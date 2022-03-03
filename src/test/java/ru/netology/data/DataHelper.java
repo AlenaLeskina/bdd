@@ -1,10 +1,9 @@
 package ru.netology.data;
-
+import lombok.AllArgsConstructor;
 import lombok.Value;
 
 public class DataHelper {
-    private DataHelper() {
-    }
+    private DataHelper() {}
 
     @Value
     public static class AuthInfo {
@@ -21,18 +20,38 @@ public class DataHelper {
         String code;
     }
 
-    public static VerificationCode getVerificationCodeFor(AuthInfo authInfo) {
+    public static VerificationCode getVerificationCodeFor() {
         return new VerificationCode("12345");
     }
 
     @Value
-    public static class CardNumber {
-        String CardFirst;
-        String CardSecond;
+    @AllArgsConstructor
+    public static class TransmissionInfo {
+        String card;
     }
 
-    public static CardNumber getCardNumber() {
-        return new CardNumber( "5559 0000 0000 0001" , "5559 0000 0000 0002" );
+    public static TransmissionInfo getFirstCardNumber() {
+        return new TransmissionInfo("5559000000000001");
     }
 
+    public static TransmissionInfo getSecondCardNumber() {
+        return new TransmissionInfo("5559000000000002");
+    }
+
+    public static TransmissionInfo getEmptyCardNumber() {
+        return new TransmissionInfo("");
+    }
+
+    public static TransmissionInfo getNotCorrectCardNumber() {
+        return new TransmissionInfo("5555000000000000");
+    }
+
+    public static int getExpectedBalanceIfBalanceRise(int balance, int amount) {
+        return balance + amount;
+    }
+
+    public static int getExpectedBalanceIfBalanceDecrease(int balance, int amount) {
+        return balance - amount;
+    }
 }
+
